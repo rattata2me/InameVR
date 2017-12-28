@@ -43,7 +43,6 @@ set(PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(PROJECT_HEADER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/${ARCH_TARGET})
 
 set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra -pedantic -g")
@@ -59,7 +58,11 @@ file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/*.cpp"
 include_directories(
 	.
 	${HEADER_FILES}
+	${PROJECT_HEADER_DIR}
 )
+
+#Copy the library from the root directory, just delete this if not using same config.
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../build/${ARCH_TARGET}/libiname_vr.so DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${ARCH_TARGET})
 
 find_library(INAMEVR_LIB
 	NAMES

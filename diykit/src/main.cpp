@@ -1,7 +1,15 @@
 
-#include "InameProgram.h"
+#include "EasyProgram.h"
 
 int main(){
-	do_something();
+	
+	InameProgramConfig* config = new InameProgramConfig();
+	EasyProgram* ep = new EasyProgram(config);
+	
+	ep->start();
+	
+	delete config;
+	delete ep;
+	
 	return 0;
 }
