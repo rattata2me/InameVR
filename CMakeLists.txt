@@ -58,6 +58,9 @@ include_directories(
 	${HEADER_FILES}
 )
 
+#Coment this to release mode
+add_definitions(-DDEBUG_VERSION)
+
 add_library(${OUTPUT_NAME} SHARED 
 	${SOURCES}
 	${HEADERS}

@@ -8,6 +8,8 @@ class EasyProgram : public InameProgram{
 public:
 	EasyProgram(InameProgramConfig* config);
 	void onStart();
+	void tick();
+	void onStop();
 }; 
 
 #endif
