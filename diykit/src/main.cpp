@@ -5,7 +5,7 @@ int main(){
 	
 	InameProgramConfig* config = new InameProgramConfig();
 	
-	config->tickrate = 1000;
+	config->tickrate = -1;
 	
 	EasyProgram* ep = new EasyProgram(config);
 	

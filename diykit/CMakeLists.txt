@@ -78,11 +78,14 @@ find_library(INAMEVR_LIB
 	NO_CMAKE_FIND_ROOT_PATH
 )
 
+find_package( OpenCV REQUIRED )
+
 add_executable(${OUTPUT_NAME} ${SOURCES})
 
 target_link_libraries(${OUTPUT_NAME}
   ${INAMEVR_LIB}
   ${CMAKE_DL_LIBS}
+  ${OpenCV_LIBS}
 )
 
 
