@@ -1,11 +1,13 @@
 
 #include "InameProgram.h"
 
+
 InameProgram::InameProgram(InameProgramConfig* config)
 {
 	//Here everything is set up
 	tickrate = config->tickrate;
 }
+
 
 InameProgram::~InameProgram()
 {
@@ -14,17 +16,21 @@ InameProgram::~InameProgram()
 	delete &components;
 }
 
+
 void InameProgram::start()
 {
 	LOG(INFO, "Running iname vr version " + std::to_string(INAME_MAJOR_VERSION) + "." + std::to_string(INAME_MINOR_VERSION) + "." + std::to_string(INAME_PATCH_VERSION));
 	
 	running = true;
 	
+	readSettings();
+	
 	//Call the public method OnStart
 	onStart();
 	enterMainLoop();
 	
 }
+
 
 void InameProgram::enterMainLoop()
 {
@@ -52,6 +58,7 @@ void InameProgram::enterMainLoop()
 	
 }
 
+
 void InameProgram::stop()
 {
 	running = false;
@@ -72,5 +79,12 @@ InameComponent* InameProgram::getComponent(int id)
 {
 	return (components.find(id)->second);
 }
+
+
+void InameProgram::readSettings(std::__cxx11::string settings_file_location)
+{
+	
+}
+
 
 

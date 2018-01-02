@@ -10,6 +10,7 @@
 #include "log.h"
 #include "InameComponent.h"
 
+static const std::string DEFAULT_SETTINGS_LOCATION = "settings.iname";
 static const int TICKRATE_MAXIMUN = -1;
 
 class InameProgramConfig{
@@ -35,6 +36,7 @@ public:
 	void start();
 	virtual void tick() = 0;
 	void stop();
+	void readSettings(std::string settings_file_location = DEFAULT_SETTINGS_LOCATION);
 	
 private:
 	int tickrate;
