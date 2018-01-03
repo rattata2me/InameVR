@@ -61,15 +61,12 @@ include_directories(
 	${PROJECT_HEADER_DIR}
 )
 
-#Copy the library from the root directory, just delete this if not using same config.
-file(REMOVE_RECURSE ${CMAKE_CURRENT_SOURCE_DIR}/lib/)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../build/${ARCH_TARGET}/libiname_vr.so DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib/${ARCH_TARGET})
-
 find_library(INAMEVR_LIB
 	NAMES
 		iname_vr
 	PATHS
-		${CMAKE_CURRENT_SOURCE_DIR}/lib
+		${CMAKE_CURRENT_SOURCE_DIR}/lib/ 
+		${CMAKE_CURRENT_SOURCE_DIR}/../build/ #Delete this, this is just for testing
 	PATH_SUFFIXES
     		osx32
     		linux64

@@ -3,7 +3,7 @@
 
 EasyProgram::EasyProgram(InameProgramConfig* config): InameProgram(config)
 {
-	
+	service = new EasyService(this);
 }
 
 void EasyProgram::tick()

@@ -3,18 +3,22 @@
 
 #include "log.h"
 
+#include "InameProgram.h"
 #include "TrackerCamera.h"
 
 class EasyService{
 	
 public:
-	EasyService();
+	EasyService(InameProgram* program);
 	
 	virtual void start();
 	virtual void update();
 	
+	void addCamera(TrackerCamera camera);
+	
 private:
 	std::vector<TrackerCamera> cameras;
+	InameProgram* program;
 	
 };
 

@@ -4,14 +4,21 @@
 #include <map>
 #include <chrono>
 #include <thread>
+#include <fstream>
 
 #include "common.h"
+
+#include "json.h"
 
 #include "log.h"
 #include "InameComponent.h"
 
 static const std::string DEFAULT_SETTINGS_LOCATION = "settings.iname";
 static const int TICKRATE_MAXIMUN = -1;
+static const std::string VALUE_NULL = "null_value";
+
+// Nlohmann library seems sweet, why not use it?
+using json = nlohmann::json;
 
 class InameProgramConfig{
 public:
@@ -37,12 +44,16 @@ public:
 	virtual void tick() = 0;
 	void stop();
 	void readSettings(std::string settings_file_location = DEFAULT_SETTINGS_LOCATION);
+	json getValueFromSettings(std::string name);
 	
 private:
 	int tickrate;
 	bool running;
 	void enterMainLoop();
 	ComponentsMap components;
+
+protected:
+	std::string json_string;
 	
 };
 

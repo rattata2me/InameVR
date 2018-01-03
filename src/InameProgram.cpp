@@ -80,10 +80,40 @@ InameComponent* InameProgram::getComponent(int id)
 	return (components.find(id)->second);
 }
 
-
-void InameProgram::readSettings(std::__cxx11::string settings_file_location)
+void InameProgram::readSettings(std::string settings_file_location)
 {
+	std::ifstream settings_stream(settings_file_location.c_str());
 	
+	if(!settings_stream.good()){
+		
+		LOG(WARNING, "Settings file not created or inaccessible, creating it.");
+		settings_stream.close();
+		std::ofstream settings_stream_write(settings_file_location.c_str());
+		settings_stream_write.close();
+		settings_stream.open(settings_file_location.c_str());
+		
+	}
+	
+	if(!settings_stream.is_open()){
+		
+		LOG(ERROR, "CAN NOT OPEN SETTINGS FILE, THERE IS NO SPACE LEFT?");
+		return;
+	}
+	
+	char i;
+	while(settings_stream.get(i)){
+		json_string.push_back(i);
+	}
+	settings_stream.close();
+	LOG(INFO, "Succesfully loaded settings file");
+}
+
+// Json library for serialization, however json_string is still accessible from extending classes.
+json InameProgram::getValueFromSettings(std::string name)
+{
+	json completejson = json::parse(json_string.c_str());
+	json value = completejson.value(name, VALUE_NULL);
+	return value;
 }
 
 
