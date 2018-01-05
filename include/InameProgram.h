@@ -44,6 +44,7 @@ public:
 	virtual void tick() = 0;
 	void stop();
 	void readSettings(std::string settings_file_location = DEFAULT_SETTINGS_LOCATION);
+	
 	json getValueFromSettings(std::string name);
 	
 private:

@@ -112,7 +112,10 @@ void InameProgram::readSettings(std::string settings_file_location)
 json InameProgram::getValueFromSettings(std::string name)
 {
 	json completejson = json::parse(json_string.c_str());
-	json value = completejson.value(name, VALUE_NULL);
+	if(!completejson.is_structured() || completejson.empty()){
+		return json({});
+	}
+	json value = completejson.at(name);
 	return value;
 }
 

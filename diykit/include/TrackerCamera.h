@@ -11,8 +11,12 @@
 class TrackerCamera{
 	
 public:
-	TrackerCamera();
+	TrackerCamera(int device_id, bool flip);
+	void doTrackingStuff();
 	
+private:
+	cv::VideoCapture capturedevice;
+	bool flip;
 };
 
 
