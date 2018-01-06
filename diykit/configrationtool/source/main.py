@@ -20,7 +20,7 @@ class ConfigApp(App):
 	
 	def build(self):
 		sm = ScreenManager()
-		sm.add_widget(CameraScreen1(name="CameraScreen1", transition=SlideTransition()))
+		sm.add_widget(CameraScreen1(0, name="CameraScreen1", transition=SlideTransition()))
 		return sm
 
 

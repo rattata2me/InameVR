@@ -1,6 +1,6 @@
-
-
-
+import json
+import os
+import os.path
 
 class Camera(object):
 	
@@ -21,4 +21,20 @@ class Camera(object):
 		self.colors[5] = lower
 	
 
-cameras = []
+cameras = [Camera(0)]
+
+
+def to_json():
+	a = {}
+	camdic = {}
+	for camera in cameras:
+		camidic = {}
+		camidic["colors"] = camera.colors
+		camdic[str(camera.index)] = camidic
+	a["cameras"] = camdic
+	out = json.dumps(a, sort_keys=True, indent=4)
+	if os.path.exists("settings.iname"):	
+		os.remove("settings.iname")
+	sett = open("settings.iname", "w")
+	sett.write(out)
+	sett.close()
