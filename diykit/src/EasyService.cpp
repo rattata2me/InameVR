@@ -14,9 +14,27 @@ void EasyService::start()
 	json camerasjson = program->getValueFromSettings("cameras");
 	
 	if(!camerasjson.is_null() && camerasjson.is_array()){
-		for(int i = 0; i < camerasjson.size(); i++){
+		for(unsigned int i = 0; i < camerasjson.size(); i++){
 			json ji = camerasjson.at(i);
-			TrackerCamera camera(0, true);
+			json colorsjs = ji.at("colors");
+			bool correctly_loaded = true;
+			std::vector<int> colors;
+			if(colorsjs.is_array()){
+				for(int e = 0; e < colorsjs.size(); e++){
+					json colorjs = colorsjs.at(e);
+					if(colorjs.is_array()){
+						for(int u = 0; u < colorjs.size(); u++){
+							json colorval =  colorjs.at(u);
+							if(colorval.is_number_integer()){
+								int col =  colorval.get<int>();
+								colors.push_back(col);
+							}else correctly_loaded = false;
+						}
+					}else correctly_loaded = false;
+				}
+			}else correctly_loaded = false;
+	
+			TrackerCamera camera(0, true, colors);
 			cameras.push_back(camera);
 		}
 	}else{

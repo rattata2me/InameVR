@@ -104,6 +104,9 @@ void InameProgram::readSettings(std::string settings_file_location)
 	while(settings_stream.get(i)){
 		json_string.push_back(i);
 	}
+	if(json_string.length() < 2){
+		json_string = "{}";
+	}
 	settings_stream.close();
 	LOG(INFO, "Succesfully loaded settings file");
 }

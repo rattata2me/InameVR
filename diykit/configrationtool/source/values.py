@@ -26,11 +26,12 @@ cameras = [Camera(0)]
 
 def to_json():
 	a = {}
-	camdic = {}
+	camdic = []
 	for camera in cameras:
 		camidic = {}
 		camidic["colors"] = camera.colors
-		camdic[str(camera.index)] = camidic
+		camidic["name"] = camera.index
+		camdic.append(camidic)
 	a["cameras"] = camdic
 	out = json.dumps(a, sort_keys=True, indent=4)
 	if os.path.exists("settings.iname"):	
